@@ -145,7 +145,10 @@ class PluginManager:
                     self.logger.error("Method '%s' on plugin '%s' is not a coroutine" %
                                       (event_method_name, plugin.name))
 
-        self._fired_events.extend(tasks)
+        # FIXME Disabled fired event trackign because it was taking 99% CPU
+        # find a better way to do this.
+
+        # self._fired_events.extend(tasks)
         if wait:
             if tasks:
                 yield from asyncio.wait(tasks, loop=self._loop)
